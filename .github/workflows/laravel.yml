@@ -40,7 +40,7 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: public
-        server-dir: /htdocs
+        server-dir: /htdocs/
 
     - name: Deploy Core Laravel Files to margin
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
@@ -49,7 +49,7 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: .
-        server-dir: /margin
+        server-dir: /margin/
         exclude: |
           public/**  
           .git/**   
