@@ -8,13 +8,59 @@ jobs:
     name: FTP-Deploy-Action
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.1.0
+    - uses: actions/checkout@v3 
       with:
         fetch-depth: 2
-    - name: FTP-Deploy-Action
+    
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v4
+      with:
+        php-version: 8.3
+        coverage: none
+      
+    - name: Install Composer Dependencies
+      run: |
+        composer install --no-dev --optimize-autoloader
+        cp .env.example .env
+        sed -i 's/DB_CONNECTION=.*/DB_CONNECTION=mysql/' .env
+        sed -i 's/DB_HOST=.*/DB_HOST=${{ secrets.DB_HOST }}/' .env
+        sed -i 's/DB_PORT=.*/DB_PORT=3306/' .env
+        sed -i 's/DB_DATABASE=.*/DB_DATABASE=${{ secrets.DB_DATABASE }}/' .env
+        sed -i 's/DB_USERNAME=.*/DB_USERNAME=${{ secrets.DB_USERNAME }}/' .env
+        sed -i 's/DB_PASSWORD=.*/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/' .env
+
+    - name: Generate Key
+      run: |
+        php artisan key:generate --force
+
+    # clear all temp datas if any
+    - name: Clear ,cache and config
+      run: php artisan optimize:clear
+
+    - name: Deploy Public Folder to htdocs
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /htdocs/margin/
+        local-dir: public
+        server-dir: /htdocs
+
+    - name: Deploy Core Laravel Files to margin
+      uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: .
+        server-dir: /margin
+        exclude: |
+          public/**  
+          .git/**   
+          .github/**
+          .env
+          .node_modules/**
+          .htaccess
+          .htaccess.sample
+          .htaccess.example
+          .htaccess.dist
