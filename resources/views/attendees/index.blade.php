@@ -41,13 +41,13 @@
                     @foreach($attendees as $attendee)
                     <tr class="bg-white">
                         <th scope="row" class="px-6 py-4 border  font-medium text-gray-900 whitespace-nowrap">
-                            {{ $attendee->name }}
+                        <a href="{{route('attendees.show',$attendee)}}" class="underline hover:text-blue-600 transition-colors duration-300">{{ $attendee->name }}</a>
                         </th>
                         <td class="px-6 py-4 border">
                             {{ $attendee->email }}
                         </td>
                         <td class="px-6 py-4 border ">
-                           <a href="{{route('attendees.show',$attendee)}}" class="underline hover:text-blue-600 transition-colors duration-300">{{ $attendee->event->title }}</a>
+                           {{ $attendee->event->title}}
                         </td>
                         <td class="px-6 py-4 border ">
                             <a href="{{route('attendees.edit',$attendee)}}"> <u>Edit</u></a> /

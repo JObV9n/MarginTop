@@ -42,12 +42,12 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      */
-    // public function show(Event $event)
-    // {
-    //     $event->load(['category', 'attendees']);
+    public function show(Event $event)
+    {
+        $event->load(['category', 'attendees']);
     
-    //     return view('events.show', compact('event'));
-    // }
+        return view('events.show', compact('event'));
+    }
 
     /**
      * Show the form for editing the specified resource.

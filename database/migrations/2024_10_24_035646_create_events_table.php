@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->dateTime('date')->nullable();
             $table->string('location')->nullable();
-            $table->foreignIdFor(Category::class);
+            $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

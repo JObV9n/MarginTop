@@ -49,10 +49,10 @@
                     @foreach($events as $event)
                     <tr class="bg-white">
                         <th scope="row" class="px-6 py-4 border  font-medium text-gray-900 whitespace-nowrap">
-                            {{ $event->title }}
+                            <a href="{{route('events.show',$event)}}" class="underline hover:text-blue-600 transition-colors duration-300">  {{ $event->title }}</a>
                         </th>
                         <td class="px-6 py-4 border">
-                            {{ $event->category->name }}
+                            <a href="{{route('categories.show',$event->category)}}" class="underline hover:text-blue-600 transition-colors duration-300">  {{ $event->category->name }}</a>
                         </td>
                         <td class="px-6 py-4 border">
                             {{ $event->description }}

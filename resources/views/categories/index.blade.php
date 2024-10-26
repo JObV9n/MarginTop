@@ -26,7 +26,7 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-300">
                     <tr>
                         <th scope="col" class="px-6 py-3 border border-slate-400 ">
-                            Category Title
+                            Category Name
                         </th>   
                         <th scope="col" class="px-6 py-3 border border-slate-400">
                             Action
@@ -37,7 +37,7 @@
                     @foreach($categories as $category)
                     <tr class="bg-white">
                         <th scope="row" class="px-6 py-4 border  font-medium text-gray-900 whitespace-nowrap">
-                            {{ $category->name }}
+                        <a href="{{route('categories.show',$category)}}" class="underline hover:text-blue-600 transition-colors duration-300">  {{ $category->name }}</a>
                         </th>
                         <td class="px-6 py-4 border ">
                             <a href="{{route('categories.edit',$category)}}"> <u>Edit</u></a> /

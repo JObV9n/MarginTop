@@ -17,13 +17,13 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
 
     // Event Routes
-    Route::resource('events', EventController::class)->except(['show']);
+    Route::resource('events', EventController::class);
 
     // Attendee Routes
-    Route::resource('attendees', AttendeeController::class)->except(['show']);
+    Route::resource('attendees', AttendeeController::class);
 
     // Category Routes
-    Route::resource('categories', CategoryController::class)->except(['show']);
+    Route::resource('categories', CategoryController::class);
 
     // Profile Routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

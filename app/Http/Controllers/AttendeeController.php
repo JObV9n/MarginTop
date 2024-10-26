@@ -53,7 +53,7 @@ class AttendeeController extends Controller
      */
     public function edit(Attendee $attendee)
     {
-        $events = Event::select('id','title')->get();
+        $events = Event::select('id','title')->get(); //requirment for the dropdow
         $oldEventId = $attendee->event_id;
         return view('attendees.edit', compact('attendee','events','oldEventId'));
     }

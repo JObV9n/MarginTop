@@ -18,7 +18,7 @@ class EventFactory extends Factory
     {
         $category = Category::pluck('id');
         return [
-            'title' => fake()->sentence(),
+            'title' => fake()->randomElement(['Tuts Nepal Conference', 'GSOC 2025', 'Hiro ML RoadShine', 'Laracon 11', 'PHPCON 8.3', 'Meta DevCon 2025','EVO Esports','PSCON 2025-Berlin']),
             'description' => fake()->paragraph(),
             'date' => fake()->dateTimeBetween('now', '+1 month'),
             'location' => fake()->address(),

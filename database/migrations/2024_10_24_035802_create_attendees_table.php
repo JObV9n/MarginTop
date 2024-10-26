@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->foreignIdFor(Event::class);
+            $table->foreignIdFor(Event::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
